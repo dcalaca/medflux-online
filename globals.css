@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  html {
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-container {
+    @apply w-full max-w-full overflow-hidden;
+  }
+  
+  .responsive-grid {
+    @apply grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+  }
+  
+  .responsive-text {
+    @apply text-sm sm:text-base;
+  }
+  
+  .responsive-padding {
+    @apply p-4 md:p-8;
+  }
+}
+
+/* Responsividade e correções de zoom */
+@layer utilities {
+  /* Prevenir overflow horizontal */
+  .overflow-safe {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* Garantir que toasts não sejam cortados */
+  .toast-container {
+    z-index: 99999 !important;
+    position: fixed !important;
+    bottom: 6rem !important;
+    right: 2rem !important;
+    max-width: 90vw !important;
+    max-height: 70vh !important;
+    overflow: visible !important;
+  }
+  
+  /* Forçar posicionamento seguro para toasts */
+  [data-radix-toast-viewport] {
+    bottom: 6rem !important;
+    right: 2rem !important;
+    z-index: 99999 !important;
+  }
+  
+  /* Garantir que mensagens de erro sejam sempre visíveis */
+  .toast-error {
+    background-color: #ef4444 !important;
+    color: white !important;
+    border: 1px solid #dc2626 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    max-width: 400px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Forçar posicionamento seguro para toasts de erro */
+  [data-radix-toast-viewport] [data-variant="destructive"] {
+    background-color: #ef4444 !important;
+    color: white !important;
+    border: 2px solid #dc2626 !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
+    margin-bottom: 1rem !important;
+    max-width: 450px !important;
+    min-height: 100px !important;
+    padding: 1rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Forçar scroll se necessário */
+  .force-scroll {
+    overflow-y: auto !important;
+    max-height: 80vh !important;
+  }
+  
+  /* Forçar posicionamento do viewport de toast */
+  [data-radix-toast-viewport] {
+    position: fixed !important;
+    bottom: 6rem !important;
+    right: 1rem !important;
+    z-index: 99999 !important;
+    max-height: 60vh !important;
+    overflow: visible !important;
+  }
+  
+  /* Espaçamento extra para evitar corte */
+  .content-safe {
+    padding-bottom: 6rem !important;
+    margin-bottom: 4rem !important;
+    min-height: calc(100vh - 8rem) !important;
+  }
+  
+  /* Forçar largura máxima em mobile */
+  .mobile-container {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Corrigir layout mobile */
+  @media (max-width: 1024px) {
+    body {
+      overflow-x: hidden;
+      width: 100vw;
+    }
+    
+    #__next {
+      overflow-x: hidden;
+      width: 100vw;
+    }
+  }
+  
+  /* Melhorar Sheet mobile */
+  @media (max-width: 640px) {
+    [data-radix-sheet-content] {
+      width: 18rem !important;
+      max-width: 90vw !important;
+    }
+  }
+  
+  /* Container responsivo */
+  .container-responsive {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Melhorar navegação mobile */
+  .mobile-nav-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .mobile-nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Corrigir problemas de zoom */
+  @media screen and (max-width: 1024px) {
+    .zoom-safe {
+      min-width: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+  }
+  
+  /* Melhorar tabelas responsivas */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Melhorar cards responsivos */
+  .card-responsive {
+    min-width: 0;
+    word-wrap: break-word;
+  }
+  
+  /* Melhorar formulários responsivos */
+  .form-responsive input,
+  .form-responsive select,
+  .form-responsive textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
